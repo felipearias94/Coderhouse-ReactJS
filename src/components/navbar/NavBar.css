@@ -1,0 +1,25 @@
+.nav-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 30px;
+	flex-direction: row;
+	background: yellowgreen;
+}
+
+.brand-wrapper {
+	display: flex;
+	width: 80px;
+	height: 70px;
+}
+
+.brand-title {
+	white-space: nowrap;
+}
+
+.button-wrapper {
+	display: flex;
+	flex: 0.5;
+	align-items: flex-end;
+	justify-content: space-between;
+}

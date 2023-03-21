@@ -1,0 +1,9 @@
+.shopping-cart {
+	display: flex;
+	align-items: center;
+}
+
+.shopping-cart > img {
+	width: 30px;
+	height: 30px;
+}
