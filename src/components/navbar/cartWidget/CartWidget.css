@@ -1,9 +1,9 @@
 .shopping-cart {
-	display: flex;
-	align-items: center;
+	position: absolute;
+	right: 1.8rem;
 }
 
 .shopping-cart > img {
 	width: 30px;
-	height: 30px;
+	height: 25px;
 }
