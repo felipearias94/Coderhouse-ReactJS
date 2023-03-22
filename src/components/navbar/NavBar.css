@@ -2,6 +2,10 @@
 	align-items: center;
 }
 
+.nav-item {
+	cursor: pointer;
+}
+
 .brand-wrapper {
 	display: flex;
 	width: 80px;

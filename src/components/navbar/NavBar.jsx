@@ -1,6 +1,6 @@
 import "./NavBar.css";
 import brandLogo from "../assets/brandLogo.png";
-import CartWidget from "./cartWidget/CartWidget";
+import CartWidget from "../cartWidget/CartWidget";
 import NavButtons from "./NavButtons";
 
 const NavBar = () => {
