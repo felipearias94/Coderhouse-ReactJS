@@ -1,6 +1,6 @@
 import "./NavBar.css";
 import brandLogo from "../assets/brandLogo.png";
-import CartWidget from "./cartWidget/CartWidget";
+import CartWidget from "../cartWidget/CartWidget";
 import NavButtons from "./NavButtons";
 
 const NavBar = () => {
@@ -29,10 +29,10 @@ const NavBar = () => {
 					<span className='navbar-toggler-icon' />
 				</button>
 				<div className='collapse navbar-collapse' id='navbarNav'>
-					<ul className='navbar-nav'>
+					<ul className='navbar-nav nav-bar'>
 						<NavButtons label='Productos' route='products' />
-						<NavButtons label='Disabled' disabled={true} />
-						<CartWidget />
+						<NavButtons label='Deshabilitado' disabled={true} />
+						<CartWidget itemCounter={0} />
 					</ul>
 				</div>
 			</div>
