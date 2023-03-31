@@ -43,21 +43,24 @@ body {
 
 @font-face {
 	font-family: "ElVergel";
-	src: local("Breathing"), url("./fonts/Breathing.ttf") format("truetype");
+	src: local("Breathing"),
+		url("./components/assets/fonts/Breathing.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "ElVergel-Brand";
-	src: local("Blackpast"), url("./fonts/Blackpast.ttf") format("truetype");
+	src: local("Blackpast"),
+		url("./components/assets/fonts/Blackpast.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "ElVergel-Bold";
-	src: local("Swiss721"), url("./fonts/Swiss721.ttf") format("truetype");
+	src: local("Swiss721"),
+		url("./components/assets/fonts/Swiss721.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "ElVergel-Light";
 	src: local("Swiss721-light"),
-		url("./fonts/Swiss721-light.ttf") format("truetype");
+		url("./components/assets/fonts/Swiss721-light.ttf") format("truetype");
 }
