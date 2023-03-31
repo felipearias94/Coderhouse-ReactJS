@@ -21,7 +21,8 @@ function ItemListContainer({ greetings }) {
 
 	return (
 		<div>
-			<Loader isLoaded={isLoaded} />
+			{isLoaded && <Loader isLoaded={isLoaded} />}
+
 			<h1 className='title'>{greetings}</h1>
 			<ItemList products={products} />
 		</div>

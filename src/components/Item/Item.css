@@ -4,4 +4,16 @@
 
 .card-title {
 	font-family: "ElVergel-Bold";
+	font-size: 22px;
+	text-align: center;
+	border-bottom: 1px solid lightgray;
+}
+
+.card-price {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.card-text {
+	text-align: justify;
 }
