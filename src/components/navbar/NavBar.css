@@ -6,6 +6,10 @@
 	cursor: pointer;
 }
 
+.navbar-brand {
+	font-family: "ElVergel";
+}
+
 .brand-wrapper {
 	display: flex;
 	width: 80px;

@@ -1,3 +1,7 @@
 .title {
 	text-align: center;
+	font-family: "ElVergel-Brand";
+	padding: 1rem 2rem;
+	border-bottom: 1px solid lightgray;
+	margin: 2rem;
 }
