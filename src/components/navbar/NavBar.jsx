@@ -13,7 +13,7 @@ const NavBar = () => {
 						alt='Logo'
 						width='40'
 						height='34'
-						class='d-inline-block align-text-top'
+						className='d-inline-block align-text-top'
 					></img>
 					El Vergel
 				</a>
