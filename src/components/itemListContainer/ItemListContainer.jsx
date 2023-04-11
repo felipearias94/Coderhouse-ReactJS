@@ -12,7 +12,7 @@ function ItemListContainer({ greetings }) {
 
 	useEffect(() => {
 		const productFunction = categoryId ? getProductsByCategoryId : getProducts;
-		
+
 		productFunction(categoryId)
 			.then((response) => {
 				setIsLoaded(false);

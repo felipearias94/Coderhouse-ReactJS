@@ -31,11 +31,11 @@ const NavBar = () => {
 				</button>
 				<div className='collapse navbar-collapse' id='navbarNav'>
 					<ul className='navbar-nav nav-bar'>
-						<NavLink to={"/"}>
-							<NavButtons label='Productos' />
+						<NavLink to={"/category/1"}>
+							<NavButtons label='Unidades' />
 						</NavLink>
-						<NavLink>
-							<NavButtons label='Deshabilitado' disabled={true} />
+						<NavLink to={"/category/2"}>
+							<NavButtons label='Cajones' />
 						</NavLink>
 
 						<CartWidget itemCounter={0} />

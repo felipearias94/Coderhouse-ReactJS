@@ -52,7 +52,7 @@ const products = [
         categoryId: '2',
         name: 'Cajón de Albahaca',
         price: 4500,
-        img: '../img/albahaca.png',
+        img: '../img/albahaca-maceta.png',
         description: 'Hortaliza de primera calidad'
     },
     {
