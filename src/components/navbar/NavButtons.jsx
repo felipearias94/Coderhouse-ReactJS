@@ -1,15 +1,14 @@
 import React from "react";
 
-const NavButtons = ({ route, label, disabled }) => {
+const NavButtons = ({ label, disabled }) => {
 	return (
 		<li className='nav-item'>
-			<a
+			<span
 				className={disabled ? "nav-link disabled" : "nav-link active"}
 				aria-current='page'
-				href={route}
 			>
 				{label}
-			</a>
+			</span>
 		</li>
 	);
 };
