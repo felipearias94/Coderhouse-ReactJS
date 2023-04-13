@@ -4,6 +4,7 @@ const products = [
         categoryId: '1',
         name: 'Lechuga Crespa',
         price: 220,
+        stock: 10,
         img: '../img/lechuga-crespa.png',
         description: 'Hortaliza de primera calidad'
     },
@@ -12,6 +13,7 @@ const products = [
         categoryId: '1',
         name: 'Lechuga Morada',
         price: 220,
+        stock: 7,
         img: '../img/lechuga-morada.png',
         description: 'Hortaliza de primera calidad'
     },
@@ -20,6 +22,7 @@ const products = [
         categoryId: '1',
         name: 'Albahaca',
         price: 240,
+        stock: 10,
         img: '../img/albahaca.png',
         description: 'Hortaliza de primera calidad'
     },
@@ -28,6 +31,7 @@ const products = [
         categoryId: '1',
         name: 'Rúcula',
         price: 220,
+        stock: 10,
         img: '../img/rucula.png',
         description: 'Hortaliza de primera calidad'
     },
@@ -36,6 +40,7 @@ const products = [
         categoryId: '2',
         name: 'Cajón de Lechuga Crespa',
         price: 4000,
+        stock: 10,
         img: '../img/cajon-crespa.png',
         description: 'Hortaliza de primera calidad'
     },
@@ -44,6 +49,7 @@ const products = [
         categoryId: '2',
         name: 'Cajón de Lechuga Morada',
         price: 4000,
+        stock: 10,
         img: '../img/lechuga-morada.png',
         description: 'Hortaliza de primera calidad'
     },
@@ -52,6 +58,7 @@ const products = [
         categoryId: '2',
         name: 'Cajón de Albahaca',
         price: 4500,
+        stock: 5,
         img: '../img/albahaca-maceta.png',
         description: 'Hortaliza de primera calidad'
     },
@@ -60,6 +67,7 @@ const products = [
         categoryId: '2',
         name: 'Cajón de Rúcula',
         price: 4000,
+        stock: 10,
         img: '../img/rucula.png',
         description: 'Hortaliza de primera calidad'
     },
