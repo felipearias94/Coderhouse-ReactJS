@@ -27,6 +27,7 @@
 input {
 	text-align: center;
 	cursor: default;
+	width: 20%;
 }
 
 .disabled:hover {
