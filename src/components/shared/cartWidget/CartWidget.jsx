@@ -1,4 +1,4 @@
-import cart from "../assets/icons/cart.svg";
+import cart from "../../assets/icons/cart.svg";
 import "./CartWidget.css";
 
 function CartWidget({ itemCounter }) {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./ItemCounter.css";
 import { Link } from "react-router-dom";
 
-const ItemCounter = ({ min, max, addToCart }) => {
+const ItemCounter = ({ min, max, addToCart: onAdd }) => {
 	const [counter, setCounter] = useState(1);
 
 	const increaseHandler = () => {
@@ -30,7 +30,7 @@ const ItemCounter = ({ min, max, addToCart }) => {
 			<Link to={"../cart"}>
 				<button
 					className={"btn btn-outline-primary " + (max === 0 ? "disabled" : "")}
-					onClick={() => addToCart(counter)}
+					onClick={() => onAdd(counter)}
 				>
 					{max < 1 ? "Sin stock" : "Agregar al carrito"}
 				</button>

@@ -13,7 +13,7 @@ const ItemDetail = ({ id, name, price, img, description, stock }) => {
 				<p className='card-price'>$ {price}</p>
 				<p className='card-text'>{description}</p>
 			</div>
-			<ItemCounter addToCart={counterHandler} min={1} max={stock} />
+			<ItemCounter onAdd={counterHandler} min={1} max={stock} />
 		</>
 	);
 };

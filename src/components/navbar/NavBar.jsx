@@ -1,6 +1,6 @@
 import "./NavBar.css";
 import brandLogo from "../assets/brandLogo.png";
-import CartWidget from "../cartWidget/CartWidget";
+import CartWidget from "../shared/cartWidget/CartWidget";
 import NavButtons from "./NavButtons";
 import { Link, NavLink } from "react-router-dom";
 
