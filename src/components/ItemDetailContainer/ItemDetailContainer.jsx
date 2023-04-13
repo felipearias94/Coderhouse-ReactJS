@@ -4,6 +4,7 @@ import Loader from "../shared/Loader/Loader";
 import { getProductById } from "../../asyncmock";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { Link, useParams } from "react-router-dom";
+import backIcon from "../assets/icons/back.svg";
 
 const ItemDetailContainer = () => {
 	const { itemId } = useParams();
@@ -24,11 +25,16 @@ const ItemDetailContainer = () => {
 			{isLoaded ? (
 				<Loader isLoaded={isLoaded} />
 			) : (
-				<div className='container'>
-					<Link to={"../"}>Volver</Link>
-
-					<ItemDetail {...product} />
-				</div>
+				<>
+					<div>
+						<Link to={"../"} className='back-button'>
+							<img src={backIcon} alt='volver'></img>
+						</Link>
+					</div>
+					<div className='container'>
+						<ItemDetail {...product} />
+					</div>
+				</>
 			)}
 		</>
 	);

@@ -13,7 +13,7 @@ const products = [
         categoryId: '1',
         name: 'Lechuga Morada',
         price: 220,
-        stock: 7,
+        stock: 1,
         img: '../img/lechuga-morada.png',
         description: 'Hortaliza de primera calidad'
     },

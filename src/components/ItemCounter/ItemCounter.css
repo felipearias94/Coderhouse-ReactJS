@@ -1,8 +1,21 @@
 .counter-wrapper {
 	display: flex;
-	flex-direction: row;
-	align-items: baseline;
-	justify-content: flex-start;
+	justify-content: flex-end;
+	clear: both;
+	width: inherit;
+	height: auto;
+	align-items: center;
+	position: static;
+	padding: 0px 10px 5px 10px;
+}
+
+@media (max-width: 600px) {
+	.counter-wrapper {
+		display: block;
+	}
+	input {
+		width: 29%;
+	}
 }
 
 .btn-outline-secondary {
@@ -14,4 +27,8 @@
 input {
 	text-align: center;
 	cursor: default;
+}
+
+.disabled:hover {
+	cursor: not-allowed !important;
 }

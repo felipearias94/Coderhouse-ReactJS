@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./ItemCounter.css";
+import { Link } from "react-router-dom";
 
-const ItemCounter = ({ min, max }) => {
+const ItemCounter = ({ min, max, addToCart }) => {
 	const [counter, setCounter] = useState(1);
 
 	const increaseHandler = () => {
@@ -11,22 +12,29 @@ const ItemCounter = ({ min, max }) => {
 		if (counter > min) setCounter(counter - 1);
 	};
 
-	const addToCart = () => {
-		console.log(`Agregado ${counter} items`);
-	};
-
 	return (
 		<div className='counter-wrapper'>
-			<button className='btn btn-outline-secondary' onClick={decreaseHandler}>
+			<button
+				className={"btn btn-outline-secondary " + (max <= 1 ? "disabled" : "")}
+				onClick={decreaseHandler}
+			>
 				-
 			</button>
 			<input readOnly={true} value={counter}></input>
-			<button className='btn btn-outline-secondary' onClick={increaseHandler}>
+			<button
+				className={"btn btn-outline-secondary " + (max <= 1 ? "disabled" : "")}
+				onClick={increaseHandler}
+			>
 				+
 			</button>
-			<button className='btn btn-outline-primary' onClick={addToCart}>
-				Agregar al carrito
-			</button>
+			<Link to={"../cart"}>
+				<button
+					className={"btn btn-outline-primary " + (max === 0 ? "disabled" : "")}
+					onClick={() => addToCart(counter)}
+				>
+					{max < 1 ? "Sin stock" : "Agregar al carrito"}
+				</button>
+			</Link>
 		</div>
 	);
 };

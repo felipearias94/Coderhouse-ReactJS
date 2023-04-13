@@ -1,22 +1,35 @@
 .container {
-	display: flex;
-	padding: 5%;
-	gap: 5rem;
-	@media (max-width: 600px) {
-		flex-direction: column;
-	}
+	max-width: 70%;
+	margin-top: 10vh;
+	padding: 3%;
+	border: 1px solid gray;
+	border-radius: 8px;
 }
 
 .product-image {
-	width: 20%;
-	height: 20%;
-	aspect-ratio: 1/1;
+	width: 30%;
+	height: auto;
+	padding: 5px 0px 5px 10px;
+	float: left;
 }
 
 .product-info {
+	width: auto;
+	height: auto;
+	display: flex;
 	flex-direction: column;
+	align-items: center;
+	padding: 5px 10px 5px 2%;
 }
 
 .product-info > .title {
 	font-family: "ElVergel-Bold";
+}
+
+.back-button > img {
+	width: 35px;
+	height: 35px;
+	position: relative;
+	top: 2rem;
+	left: 6%;
 }
