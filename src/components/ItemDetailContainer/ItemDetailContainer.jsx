@@ -21,12 +21,15 @@ const ItemDetailContainer = () => {
 
 	return (
 		<>
-			{isLoaded && <Loader isLoaded={isLoaded} />}
-			<div className='container'>
-				<Link to={"../"}>Volver</Link>
+			{isLoaded ? (
+				<Loader isLoaded={isLoaded} />
+			) : (
+				<div className='container'>
+					<Link to={"../"}>Volver</Link>
 
-				<ItemDetail {...product} />
-			</div>
+					<ItemDetail {...product} />
+				</div>
+			)}
 		</>
 	);
 };

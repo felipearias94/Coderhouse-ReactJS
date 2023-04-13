@@ -23,12 +23,16 @@ function ItemListContainer({ greetings }) {
 	}, [categoryId]);
 
 	return (
-		<div>
-			{isLoaded && <Loader isLoaded={isLoaded} />}
-
-			<h1 className='title'>{greetings}</h1>
-			<ItemList products={products} />
-		</div>
+		<>
+			{isLoaded ? (
+				<Loader isLoaded={isLoaded} />
+			) : (
+				<div>
+					<h1 className='title'>{greetings}</h1>
+					<ItemList products={products} />
+				</div>
+			)}
+		</>
 	);
 }
 
