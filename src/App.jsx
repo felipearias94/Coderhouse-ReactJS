@@ -7,6 +7,7 @@ import "./components/assets/fonts/Blackpast.ttf";
 import "./components/assets/fonts/Swiss721.ttf";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFoundPage from "./components/shared/NotFoundPage/NotFoundPage";
+import Cart from "./components/Cart/Cart";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 						element={<ItemListContainer greetings={"Bienvenido"} />}
 					/>
 					<Route path='/item/:itemId' element={<ItemDetailContainer />} />
+					<Route path='/cart' element={<Cart />} />
 					<Route path='*' element={<NotFoundPage />} />
 				</Routes>
 			</BrowserRouter>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./ItemCounter.css";
 import { Link } from "react-router-dom";
 
-const ItemCounter = ({ min, max, addToCart: onAdd }) => {
+const ItemCounter = ({ min, max, onAdd }) => {
 	const [counter, setCounter] = useState(1);
 
 	const increaseHandler = () => {
