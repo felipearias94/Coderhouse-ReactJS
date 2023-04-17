@@ -3,7 +3,7 @@ import "./CartWidget.css";
 
 function CartWidget({ itemCounter }) {
 	return (
-		<div className='shopping-cart'>
+		<div className='shopping-cart '>
 			<img src={cart} alt='shopping-cart' />
 			{itemCounter}
 		</div>

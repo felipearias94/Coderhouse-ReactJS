@@ -2,21 +2,22 @@ import "./NavBar.css";
 import brandLogo from "../assets/brandLogo.png";
 import CartWidget from "../cartWidget/CartWidget";
 import NavButtons from "./NavButtons";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
 	return (
 		<nav className='navbar navbar-expand-lg bg-body-tertiary'>
 			<div className='container-fluid'>
-				<a className='navbar-brand' href='home'>
+				<Link to={"/"} className='navbar-brand'>
 					<img
 						src={brandLogo}
 						alt='Logo'
 						width='40'
 						height='34'
-						class='d-inline-block align-text-top'
+						className='d-inline-block align-text-top'
 					></img>
 					El Vergel
-				</a>
+				</Link>
 				<button
 					className='navbar-toggler'
 					type='button'
@@ -30,8 +31,13 @@ const NavBar = () => {
 				</button>
 				<div className='collapse navbar-collapse' id='navbarNav'>
 					<ul className='navbar-nav nav-bar'>
-						<NavButtons label='Productos' route='products' />
-						<NavButtons label='Deshabilitado' disabled={true} />
+						<NavLink to={"/category/1"}>
+							<NavButtons label='Unidades' />
+						</NavLink>
+						<NavLink to={"/category/2"}>
+							<NavButtons label='Cajones' />
+						</NavLink>
+
 						<CartWidget itemCounter={0} />
 					</ul>
 				</div>

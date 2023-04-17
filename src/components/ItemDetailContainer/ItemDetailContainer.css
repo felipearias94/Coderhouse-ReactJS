@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	padding: 5%;
+	gap: 5rem;
+	@media (max-width: 600px) {
+		flex-direction: column;
+	}
+}
+
+.product-image {
+	width: 20%;
+	height: 20%;
+	aspect-ratio: 1/1;
+}
+
+.product-info {
+	flex-direction: column;
+}
+
+.product-info > .title {
+	font-family: "ElVergel-Bold";
+}
