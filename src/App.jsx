@@ -8,25 +8,28 @@ import "./components/assets/fonts/Swiss721.ttf";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFoundPage from "./components/shared/NotFoundPage/NotFoundPage";
 import Cart from "./components/Cart/Cart";
+import { CartContext, CartProvider } from "./context/CartContext";
 
 function App() {
 	return (
 		<>
 			<BrowserRouter>
-				<NavBar />
-				<Routes>
-					<Route
-						path='/'
-						element={<ItemListContainer greetings={"Bienvenido"} />}
-					/>
-					<Route
-						path='/category/:categoryId'
-						element={<ItemListContainer greetings={"Bienvenido"} />}
-					/>
-					<Route path='/item/:itemId' element={<ItemDetailContainer />} />
-					<Route path='/cart' element={<Cart />} />
-					<Route path='*' element={<NotFoundPage />} />
-				</Routes>
+				<CartProvider>
+					<NavBar />
+					<Routes>
+						<Route
+							path='/'
+							element={<ItemListContainer greetings={"Bienvenido"} />}
+						/>
+						<Route
+							path='/category/:categoryId'
+							element={<ItemListContainer greetings={"Bienvenido"} />}
+						/>
+						<Route path='/item/:itemId' element={<ItemDetailContainer />} />
+						<Route path='/cart' element={<Cart />} />
+						<Route path='*' element={<NotFoundPage />} />
+					</Routes>
+				</CartProvider>
 			</BrowserRouter>
 		</>
 	);
