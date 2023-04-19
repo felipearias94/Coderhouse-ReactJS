@@ -1,11 +1,19 @@
+import { useContext } from "react";
 import "./Cart.css";
-import underConstruction from "../assets/under-construction.png";
+import { CartContext } from "../../context/CartContext";
 
 const Cart = () => {
+	const context = useContext(CartContext);
 	return (
-		<div>
-			<img src={underConstruction} alt='underConstruction' />
-		</div>
+		<>
+			<div className='container'>
+				{context.cart.length == 0 ? (
+					<p>No hay nada che</p>
+				) : (
+					<p>Hay unas cositas</p>
+				)}
+			</div>
+		</>
 	);
 };
 

@@ -6,7 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
 	return (
-		<nav className='navbar navbar-expand-lg bg-body-tertiary'>
+		<nav className='navbar navbar-expand-lg bg-success p-2 text-dark bg-opacity-25'>
 			<div className='container-fluid'>
 				<Link to={"/"} className='navbar-brand'>
 					<img
@@ -37,8 +37,9 @@ const NavBar = () => {
 						<NavLink to={"/category/2"}>
 							<NavButtons label='Cajones' />
 						</NavLink>
-
-						<CartWidget itemCounter={0} />
+						<NavLink to={"/cart"}>
+							<CartWidget itemCounter={0} />
+						</NavLink>
 					</ul>
 				</div>
 			</div>
