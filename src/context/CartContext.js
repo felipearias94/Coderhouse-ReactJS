@@ -1,35 +1,42 @@
-import { createContext, useState } from "react";
+import { useState, createContext } from "react";
 
-export const CartContext = createContext({ carrito: [] })
+export const CartContext = createContext({ cart: [] });
 
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
+	const [cart, setCart] = useState([]);
+	const [cartTotal, setCartTotal] = useState(0);
 
-    const isInCart = (itemId) => {
-        return cart.some(item => item.id === itemId)
-    }
+	console.log(cart);
 
-    const addItem = (item, quantity) => {
-        if (isInCart(item.id)) {
-            return;
-        }
-        setCart(prev => [...prev, { item, quantity }])
-    }
+	const addItem = (item, quatity) => {
+		if (isInCart(item.id)) {
+			return;
+		}
+		setCartTotal(cartTotal + quatity);
+		setCart((prev) => [...prev, { item, quatity }]);
+	};
 
-    const removeItem = (itemId) => {
-        const filteredCart = cart.filter(item => {
-            item.id === itemId
-        });
-        setCart(filteredCart);
-    }
+	const removeItem = (id) => {
+		const updatedCart = cart.filter((prod) => prod.id !== id);
+		setCart(updatedCart);
+	};
 
-    const clearCart = () => {
-        setCart([]);
-    }
+	const clearCart = () => {
+		setCart([]);
+		setCartTotal(0);
+	};
 
-    return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, clearCart }}>
-            {children}
-        </CartContext.Provider>
-    )
-}
+	const isInCart = (id) => {
+		return cart.some((prod) => prod.item.id === id);
+	};
+
+	return (
+		<CartContext.Provider
+			value={{ cart, addItem, removeItem, clearCart, cartTotal }}
+		>
+			{children}
+		</CartContext.Provider>
+	);
+
+	//7) Children: propiedad especial que se utiliza para representar a todos aquellos componentes que puedan necesitar el carrito y sus métodos.
+};

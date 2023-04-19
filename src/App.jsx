@@ -8,7 +8,7 @@ import "./components/assets/fonts/Swiss721.ttf";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFoundPage from "./components/shared/NotFoundPage/NotFoundPage";
 import Cart from "./components/Cart/Cart";
-import { CartContext, CartProvider } from "./context/CartContext";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
 	return (

@@ -27,14 +27,14 @@ const ItemCounter = ({ min, max, onAdd }) => {
 			>
 				+
 			</button>
-			<Link to={"../cart"}>
+			
 				<button
 					className={"btn btn-outline-primary " + (max === 0 ? "disabled" : "")}
 					onClick={() => onAdd(counter)}
 				>
 					{max < 1 ? "Sin stock" : "Agregar al carrito"}
 				</button>
-			</Link>
+		
 		</div>
 	);
 };

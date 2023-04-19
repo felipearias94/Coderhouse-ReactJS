@@ -1,10 +1,16 @@
 import "./ItemDetail.css";
 import ItemCounter from "../ItemCounter/ItemCounter";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 const ItemDetail = ({ id, name, price, img, description, stock }) => {
-	const counterHandler = (counter) => {
-		console.log(counter);
+	const { addItem } = useContext(CartContext);
+
+	const addToCartHandler = (counter) => {
+		const item = { id, name, price };
+		addItem(item, counter);
 	};
+
 	return (
 		<>
 			<img className='product-image' src={img} alt={name} />
@@ -13,7 +19,7 @@ const ItemDetail = ({ id, name, price, img, description, stock }) => {
 				<p className='card-price'>$ {price}</p>
 				<p className='card-text'>{description}</p>
 			</div>
-			<ItemCounter onAdd={counterHandler} min={1} max={stock} />
+			<ItemCounter onAdd={addToCartHandler} min={1} max={stock} />
 		</>
 	);
 };
