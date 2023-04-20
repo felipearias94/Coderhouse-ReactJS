@@ -28,7 +28,7 @@ function App() {
 						/>
 						<Route path='/item/:itemId' element={<ItemDetailContainer />} />
 						<Route path='/cart' element={<Cart />} />
-						<Route path='/cart/checkout' element={<PurchaseCheckout />} />
+						<Route path='/cart/checkout/' element={<PurchaseCheckout />} />
 						<Route path='*' element={<NotFoundPage />} />
 					</Routes>
 				</CartProvider>

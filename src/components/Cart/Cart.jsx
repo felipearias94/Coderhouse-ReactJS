@@ -2,15 +2,13 @@ import { useContext } from "react";
 import "./Cart.css";
 import { CartContext } from "../../context/CartContext";
 import deleteIcon from "../assets/icons/delete-icon.svg";
-import CustomButton from "../shared/CustomButton/CustomButton";
-import { useNavigate } from "react-router-dom";
+import ActionButton from "../shared/ActionButton/ActionButton";
 import emptyCart from "../assets/emptyCart.png";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import NavigationButton from "../shared/NavigationButton/NavigationButton";
 
 const Cart = () => {
 	const context = useContext(CartContext);
-	const navigate = useNavigate();
 	const [colSpanSize, setColSpanSize] = useState(4);
 	useEffect(() => {
 		window.addEventListener("resize", isMobile);
@@ -18,13 +16,10 @@ const Cart = () => {
 			window.removeEventListener("resize", isMobile);
 		};
 	});
+	let purchaseId = "";
 
 	const isMobile = () => {
 		window.innerWidth >= 768 ? setColSpanSize(4) : setColSpanSize(3);
-	};
-
-	const navigateToHome = () => {
-		navigate("/");
 	};
 
 	const clearCartItems = () => {
@@ -41,8 +36,8 @@ const Cart = () => {
 			products: context.cart,
 			amount: totalPurchase,
 		};
+		purchaseId = (Math.random() + 1).toString(36).substring(2);
 		console.log(purchaseData);
-		navigate("./checkout");
 	};
 
 	const removeCartItem = (itemId) => {
@@ -54,10 +49,10 @@ const Cart = () => {
 			<div className='empty-cart'>
 				<img src={emptyCart} alt='carrito-vacio' />
 				<h2>Tu carrito está vacío</h2>
-				<CustomButton
+				<NavigationButton
+					goBack={false}
+					route={`../`}
 					label={"Volver a comprar"}
-					importance={"primary"}
-					actionHandler={navigateToHome}
 				/>
 			</div>
 		);
@@ -101,15 +96,16 @@ const Cart = () => {
 					</tfoot>
 				</table>
 				<div className='actions'>
-					<CustomButton
+					<ActionButton
 						label={"Vaciar carrito"}
-						importance={"light"}
+						buttonClass={"light"}
 						actionHandler={clearCartItems}
 					/>
-					<CustomButton
+					<NavigationButton
+						goBack={false}
+						route={`./checkout`}
+						action={endPurchase}
 						label={"Finalizar compra"}
-						importance={"primary"}
-						actionHandler={endPurchase}
 					/>
 				</div>
 			</>
@@ -118,8 +114,9 @@ const Cart = () => {
 
 	return (
 		<>
+			<NavigationButton route='../' />
 			<div className='container'>
-				{context.cart.length == 0 ? <EmtyCart /> : <CartItemListed />}
+				{context.cart.length === 0 ? <EmtyCart /> : <CartItemListed />}
 			</div>
 		</>
 	);

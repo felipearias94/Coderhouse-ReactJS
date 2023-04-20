@@ -2,9 +2,11 @@ import "./ItemDetail.css";
 import ItemCounter from "../ItemCounter/ItemCounter";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
+import { useState } from "react";
 
 const ItemDetail = ({ id, name, price, img, description, stock }) => {
-	const { addItem } = useContext(CartContext);
+	const { cart, addItem } = useContext(CartContext);
+	const [isInCart, setIsInCart] = useState();
 
 	const addToCartHandler = (counter) => {
 		const item = { id, name, price, img };
