@@ -68,6 +68,10 @@ tr:last-child {
 	font-size: 19px;
 }
 
+#removable {
+	text-align: center;
+}
+
 th.delete-item,
 td.delete-item {
 	width: 6% !important;
