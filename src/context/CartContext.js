@@ -16,14 +16,19 @@ export const CartProvider = ({ children }) => {
 
 	const removeItem = (id) => {
 		const updatedCart = cart.filter((prod) => prod.item.id !== id);
-		console.log('aqui', updatedCart)
 		setCart(updatedCart);
+		updateCartTotalItem(updatedCart);
 	};
 
 	const clearCart = () => {
 		setCart([]);
 		setCartTotal(0);
 	};
+
+	const updateCartTotalItem = (newCartItems) => {
+		const newValue = newCartItems.reduce((total, item) => total + item.quantity, 0)
+		setCartTotal(newValue);
+	}
 
 	const isInCart = (id) => {
 		return cart.some((prod) => prod.item.id === id);
