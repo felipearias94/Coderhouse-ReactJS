@@ -1,5 +1,6 @@
 import "./App.css";
 import ItemListContainer from "./components/itemListContainer/ItemListContainer";
+import PurchaseCheckout from "./components/PurchaseCheckout/PurchaseCheckout";
 import NavBar from "./components/navbar/NavBar";
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer";
 import "./components/assets/fonts/Breathing.ttf";
@@ -27,6 +28,7 @@ function App() {
 						/>
 						<Route path='/item/:itemId' element={<ItemDetailContainer />} />
 						<Route path='/cart' element={<Cart />} />
+						<Route path='/cart/checkout' element={<PurchaseCheckout />} />
 						<Route path='*' element={<NotFoundPage />} />
 					</Routes>
 				</CartProvider>
