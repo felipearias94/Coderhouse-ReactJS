@@ -6,18 +6,17 @@ export const CartProvider = ({ children }) => {
 	const [cart, setCart] = useState([]);
 	const [cartTotal, setCartTotal] = useState(0);
 
-	console.log(cart);
-
-	const addItem = (item, quatity) => {
+	const addItem = (item, quantity) => {
 		if (isInCart(item.id)) {
 			return;
 		}
-		setCartTotal(cartTotal + quatity);
-		setCart((prev) => [...prev, { item, quatity }]);
+		setCartTotal(cartTotal + quantity);
+		setCart((prev) => [...prev, { item, quantity }]);
 	};
 
 	const removeItem = (id) => {
-		const updatedCart = cart.filter((prod) => prod.id !== id);
+		const updatedCart = cart.filter((prod) => prod.item.id !== id);
+		console.log('aqui', updatedCart)
 		setCart(updatedCart);
 	};
 
@@ -37,6 +36,4 @@ export const CartProvider = ({ children }) => {
 			{children}
 		</CartContext.Provider>
 	);
-
-	//7) Children: propiedad especial que se utiliza para representar a todos aquellos componentes que puedan necesitar el carrito y sus métodos.
 };

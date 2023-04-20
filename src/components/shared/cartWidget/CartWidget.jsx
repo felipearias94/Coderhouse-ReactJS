@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
-import cartIcon from "../../assets/icons/cart.svg";
+import emptyCartIcon from "../../assets/icons/emptyCart.svg";
+import fullCartIcon from "../../assets/icons/fullCart.svg";
 import "./CartWidget.css";
 
 function CartWidget() {
@@ -8,7 +9,10 @@ function CartWidget() {
 
 	return (
 		<div className='shopping-cart '>
-			<img src={cartIcon} alt='shopping-cart' />
+			<img
+				src={cartTotal === 0 ? emptyCartIcon : fullCartIcon}
+				alt='shopping-cart'
+			/>
 			{cartTotal}
 		</div>
 	);

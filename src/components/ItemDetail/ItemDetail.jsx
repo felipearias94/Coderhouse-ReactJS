@@ -7,7 +7,7 @@ const ItemDetail = ({ id, name, price, img, description, stock }) => {
 	const { addItem } = useContext(CartContext);
 
 	const addToCartHandler = (counter) => {
-		const item = { id, name, price };
+		const item = { id, name, price, img };
 		addItem(item, counter);
 	};
 
