@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./ItemCounter.css";
+import ActionButton from "../ActionButton/ActionButton";
 import { Link } from "react-router-dom";
 
 const ItemCounter = ({ min, max, onAdd }) => {
@@ -27,14 +28,11 @@ const ItemCounter = ({ min, max, onAdd }) => {
 			>
 				+
 			</button>
-			
-				<button
-					className={"btn btn-outline-primary " + (max === 0 ? "disabled" : "")}
-					onClick={() => onAdd(counter)}
-				>
-					{max < 1 ? "Sin stock" : "Agregar al carrito"}
-				</button>
-		
+			<ActionButton
+				label={max < 1 ? "Sin stock" : "Agregar al carrito"}
+				buttonClass={"outline-primary " + `${max === 0 ? "disabled" : ""}`}
+				actionHandler={() => onAdd(counter)}
+			/>
 		</div>
 	);
 };

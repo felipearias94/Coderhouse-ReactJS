@@ -98,7 +98,7 @@ const Cart = () => {
 				<div className='actions'>
 					<ActionButton
 						label={"Vaciar carrito"}
-						buttonClass={"light"}
+						buttonClass={"light w-100"}
 						actionHandler={clearCartItems}
 					/>
 					<NavigationButton
