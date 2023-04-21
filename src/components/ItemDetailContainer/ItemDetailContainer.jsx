@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./ItemDetailContainer.css";
 import Loader from "../shared/Loader/Loader";
-import { getProductById } from "../../asyncmock";
+import { getProductById } from "../../Api/apiMethods";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
 import NavigationButton from "../shared/NavigationButton/NavigationButton";
@@ -13,13 +13,13 @@ const ItemDetailContainer = () => {
 
 	useEffect(() => {
 		getProductById(itemId)
-			.then((res) => {
-				setIsLoaded(false);
-				setProduct(res);
+			.then((snapshot) => {
+				setProduct({ id: snapshot.id, ...snapshot.data() });
+				console.log("aaaaaaaaaaa", product);
 			})
-			.finally(setIsLoaded(true));
+			.finally(setIsLoaded(false));
+		console.log("aaaaaaaaaaa", product);
 	}, [itemId]);
-
 	return (
 		<>
 			{isLoaded ? (

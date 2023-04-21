@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProducts, getProductsByCategoryId } from "../../asyncmock";
+import { getProducts, getProductsByCategoryId } from "../../Api/apiMethods";
 import ItemList from "../ItemList/ItemList";
 import Loader from "../shared/Loader/Loader";
 import "./ItemListContainer.css";
@@ -12,14 +12,16 @@ function ItemListContainer({ greetings }) {
 
 	useEffect(() => {
 		const productFunction = categoryId ? getProductsByCategoryId : getProducts;
-
 		productFunction(categoryId)
-			.then((response) => {
-				setIsLoaded(false);
-				setProducts(response);
+			.then((snapshot) => {
+				setProducts(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						...doc.data(),
+					})),
+				);
 			})
-			.catch((error) => console.error(error))
-			.finally(setIsLoaded(true));
+			.finally(setIsLoaded(false));
 	}, [categoryId]);
 
 	return (
