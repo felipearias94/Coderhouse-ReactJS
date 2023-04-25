@@ -1,11 +1,15 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { showToaster } from "../components/shared/UxResources/Toaster";
 
 export const CartContext = createContext({ cart: [] });
 
 export const CartProvider = ({ children }) => {
-	const [cart, setCart] = useState([]);
-	const [cartTotal, setCartTotal] = useState(0);
+	const [cart, setCart] = useState(JSON.parse(sessionStorage.getItem('cart')) || []);
+	const [cartTotal, setCartTotal] = useState(sessionStorage.getItem('cartTotal') || 0);
+
+	useEffect(() => {
+		updateSessionStorage();
+	}, [cart]);
 
 	const addItem = (item, quantity) => {
 		if (isInCart(item.id)) {
@@ -13,6 +17,7 @@ export const CartProvider = ({ children }) => {
 		}
 		setCartTotal(cartTotal + quantity);
 		setCart((prev) => [...prev, { item, quantity }]);
+		updateSessionStorage();
 		const toastMessage = quantity === 1 ? `Agregaste un item al carrito!` : `Agregaste ${quantity} items al carrito!`
 		showToaster('info', toastMessage);
 	};
@@ -38,6 +43,11 @@ export const CartProvider = ({ children }) => {
 	const isInCart = (id) => {
 		return cart.some((prod) => prod.item.id === id);
 	};
+
+	const updateSessionStorage = () => {
+		sessionStorage.setItem("cartTotal", cartTotal);
+		sessionStorage.setItem('cart', JSON.stringify(cart));
+	}
 
 	return (
 		<CartContext.Provider
