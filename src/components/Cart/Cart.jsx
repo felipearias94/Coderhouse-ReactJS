@@ -74,7 +74,7 @@ const Cart = () => {
 							<td className='delete-item'>
 								<button
 									className='btn btn-outline p-0'
-									onClick={() => removeCartItem(cartItem.item.id)}
+									onClick={() => removeCartItem(cartItem.item)}
 								>
 									<img src={deleteIcon} alt='' />
 								</button>

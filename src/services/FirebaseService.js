@@ -9,20 +9,16 @@ import {
 import { dataBase } from "./firebase/config";
 
 export const getProducts = () => {
-    const db = dataBase;
-    const itemCollection = collection(db, "items");
-    return getDocs(itemCollection);
+    return getDocs(collection(dataBase, "items"));
 };
 
 export const getProductById = (id) => {
-    const db = dataBase;
-    const product = doc(db, "items", id);
-    return getDoc(product);
+    return getDoc(doc(dataBase, "items", id));
 };
 
 export const getProductsByCategoryId = (categoryId) => {
-    const db = dataBase;
-    const itemsRef = collection(db, "items");
-    const q = query(itemsRef, where('categoryId', '==', categoryId));
-    return getDocs(q);
+    return getDocs(query(
+        collection(dataBase, "items"),
+        where('categoryId', '==', categoryId)
+    ));
 };

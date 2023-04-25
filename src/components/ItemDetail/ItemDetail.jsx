@@ -2,7 +2,6 @@ import "./ItemDetail.css";
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import ItemCounter from "../shared/ItemCounter/ItemCounter";
-import Loader from "../shared/Loader/Loader";
 
 const ItemDetail = ({ id, name, price, img, description, stock }) => {
 	const { addItem } = useContext(CartContext);

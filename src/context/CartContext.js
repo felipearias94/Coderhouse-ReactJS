@@ -1,4 +1,5 @@
 import { useState, createContext } from "react";
+import { showToaster } from "../components/shared/UxResources/Toaster";
 
 export const CartContext = createContext({ cart: [] });
 
@@ -12,17 +13,21 @@ export const CartProvider = ({ children }) => {
 		}
 		setCartTotal(cartTotal + quantity);
 		setCart((prev) => [...prev, { item, quantity }]);
+		const toastMessage = quantity === 1 ? `Agregaste un item al carrito!` : `Agregaste ${quantity} items al carrito!`
+		showToaster('info', toastMessage);
 	};
 
-	const removeItem = (id) => {
-		const updatedCart = cart.filter((prod) => prod.item.id !== id);
+	const removeItem = (item) => {
+		const updatedCart = cart.filter((prod) => prod.item.id !== item.id);
 		setCart(updatedCart);
 		updateCartTotalItem(updatedCart);
+		showToaster('error', `Listo! Eliminaste ${item.name} del carrito`);
 	};
 
 	const clearCart = () => {
 		setCart([]);
 		setCartTotal(0);
+		showToaster('error', 'Se vació el carrito!');
 	};
 
 	const updateCartTotalItem = (newCartItems) => {
