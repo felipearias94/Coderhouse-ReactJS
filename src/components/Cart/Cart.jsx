@@ -50,6 +50,7 @@ const Cart = () => {
 				<img src={emptyCart} alt='carrito-vacio' />
 				<h2>Tu carrito está vacío</h2>
 				<NavigationButton
+					fullWidth={true}
 					goBack={false}
 					route={`../`}
 					label={"Volver a comprar"}

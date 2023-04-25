@@ -5,10 +5,12 @@ import ItemCounter from "../shared/ItemCounter/ItemCounter";
 
 const ItemDetail = ({ id, name, price, img, description, stock }) => {
 	const { addItem } = useContext(CartContext);
+	const [showNavigationButton, setShowNavigationButton] = useState(false);
 
 	const addToCartHandler = (counter) => {
 		const item = { id, name, price, img };
 		addItem(item, counter);
+		setShowNavigationButton(true);
 	};
 
 	return (
@@ -21,7 +23,12 @@ const ItemDetail = ({ id, name, price, img, description, stock }) => {
 				<p className='card-text'>{description}</p>
 			</div>
 
-			<ItemCounter onAdd={addToCartHandler} min={1} max={stock} />
+			<ItemCounter
+				onAdd={addToCartHandler}
+				min={1}
+				max={stock}
+				showNavigation={showNavigationButton}
+			/>
 		</>
 	);
 };

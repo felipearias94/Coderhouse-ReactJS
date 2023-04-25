@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./ItemCounter.css";
 import ActionButton from "../ActionButton/ActionButton";
-import { Link } from "react-router-dom";
+import NavigationButton from "../NavigationButton/NavigationButton";
 
-const ItemCounter = ({ min, max, onAdd }) => {
+const ItemCounter = ({ min, max, onAdd, showNavigation }) => {
 	const [counter, setCounter] = useState(1);
 
 	const increaseHandler = () => {
@@ -33,6 +33,13 @@ const ItemCounter = ({ min, max, onAdd }) => {
 				buttonClass={"outline-primary " + `${max === 0 ? "disabled" : ""}`}
 				actionHandler={() => onAdd(counter)}
 			/>
+			{showNavigation && (
+				<NavigationButton
+					route={"../cart"}
+					label={"Finalizar compra"}
+					goBack={false}
+				/>
+			)}
 		</div>
 	);
 };

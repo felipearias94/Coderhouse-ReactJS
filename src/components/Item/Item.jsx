@@ -23,6 +23,7 @@ const Item = ({ id, name, price, img, description }) => {
 				<p className='card-text'>{description}</p>
 				<p className='card-price'>{`$ ${price}`}</p>
 				<NavigationButton
+					fullWidth={true}
 					goBack={false}
 					route={`/item/${id}`}
 					label={"Ver detalles"}

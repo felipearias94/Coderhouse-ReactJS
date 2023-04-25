@@ -6,6 +6,7 @@ const NavigationButton = ({
 	route,
 	goBack = true,
 	label,
+	fullWidth,
 	action = () => {},
 }) => {
 	const navigate = useNavigate();
@@ -22,7 +23,10 @@ const NavigationButton = ({
 					</Link>
 				</div>
 			) : (
-				<button className={`btn btn-primary w-100`} onClick={actions}>
+				<button
+					className={fullWidth ? "btn btn-primary w-100" : "btn btn-primary"}
+					onClick={actions}
+				>
 					{label}
 				</button>
 			)}
