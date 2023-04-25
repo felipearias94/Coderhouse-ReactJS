@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProducts, getProductsByCategoryId } from "../../Api/apiMethods";
+import {
+	getProducts,
+	getProductsByCategoryId,
+} from "../../services/FirebaseService";
 import ItemList from "../ItemList/ItemList";
 import Loader from "../shared/Loader/Loader";
 import "./ItemListContainer.css";
