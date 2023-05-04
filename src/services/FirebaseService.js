@@ -5,6 +5,7 @@ import {
     getDoc,
     query,
     where,
+    addDoc,
 } from "firebase/firestore";
 import { dataBase } from "./firebase/config";
 
@@ -22,3 +23,7 @@ export const getProductsByCategoryId = (categoryId) => {
         where('categoryId', '==', categoryId)
     ));
 };
+
+export const endPurchase = (purchaseData) => {
+    return addDoc(collection(dataBase, 'orders'), purchaseData)
+}

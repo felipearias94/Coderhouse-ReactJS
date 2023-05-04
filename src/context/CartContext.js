@@ -13,6 +13,7 @@ export const CartProvider = ({ children }) => {
 
 	const addItem = (item, quantity) => {
 		if (isInCart(item.id)) {
+			showToaster('error', 'Ya está en el carrito');
 			return;
 		}
 		setCartTotal(cartTotal + quantity);

@@ -16,7 +16,6 @@ const Cart = () => {
 			window.removeEventListener("resize", isMobile);
 		};
 	});
-	let purchaseId = "";
 
 	const isMobile = () => {
 		window.innerWidth >= 768 ? setColSpanSize(4) : setColSpanSize(3);
@@ -36,8 +35,7 @@ const Cart = () => {
 			products: context.cart,
 			amount: totalPurchase,
 		};
-		purchaseId = (Math.random() + 1).toString(36).substring(2);
-		console.log(purchaseData);
+		sessionStorage.setItem("purchase", JSON.stringify(purchaseData));
 	};
 
 	const removeCartItem = (itemId) => {
@@ -103,6 +101,7 @@ const Cart = () => {
 						actionHandler={clearCartItems}
 					/>
 					<NavigationButton
+						fullWidth={true}
 						goBack={false}
 						route={`./checkout`}
 						action={endPurchase}

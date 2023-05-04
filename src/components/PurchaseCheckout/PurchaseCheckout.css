@@ -1,0 +1,13 @@
+.form-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.form-wrapper > form {
+	width: 40%;
+}
+
+.purchase-details {
+	width: 40%;
+	text-align: center;
+}
