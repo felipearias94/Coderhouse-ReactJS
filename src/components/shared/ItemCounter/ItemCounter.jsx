@@ -6,25 +6,24 @@ import NavigationButton from "../NavigationButton/NavigationButton";
 const ItemCounter = ({ min, max, onAdd, showNavigation }) => {
 	const [counter, setCounter] = useState(1);
 
-	const increaseHandler = () => {
-		if (counter < max) setCounter(counter + 1);
-	};
-	const decreaseHandler = () => {
-		if (counter > min) setCounter(counter - 1);
+	const increaseHandler = (amount) => {
+		setCounter((currentValue) => {
+			return currentValue + amount;
+		});
 	};
 
 	return (
 		<div className='counter-wrapper'>
 			<button
 				className={"btn btn-outline-secondary " + (max <= 1 ? "disabled" : "")}
-				onClick={decreaseHandler}
+				onClick={() => increaseHandler(-1)}
 			>
 				-
 			</button>
 			<input readOnly={true} value={counter}></input>
 			<button
 				className={"btn btn-outline-secondary " + (max <= 1 ? "disabled" : "")}
-				onClick={increaseHandler}
+				onClick={() => increaseHandler(1)}
 			>
 				+
 			</button>

@@ -1,21 +1,93 @@
-import { serverTimestamp } from "firebase/firestore";
 import { endPurchase } from "../../services/FirebaseService";
 import NavigationButton from "../shared/NavigationButton/NavigationButton";
-import "./PurchaseCheckout.css";
-import { useState } from "react";
 import { showToaster } from "../shared/UxResources/Toaster";
+import "./PurchaseCheckout.css";
+import { useState, useEffect } from "react";
 
 const PurcheseCheckout = () => {
 	const purchaseDetails = JSON.parse(sessionStorage.getItem("purchase"));
 	const [orderId, setOrderId] = useState("");
-	const [state, setState] = useState({
+	const [formIsValid, setFormIsValid] = useState(false);
+	const [order, setOrder] = useState({
 		name: "",
 		lastName: "",
 		email: "", // hacer validacion de ambos emails
+		confirmEmail: "",
 		phone: "",
 	});
-	
-	let formIsValid = true;
+	const [validation, setValidation] = useState({
+		name: "",
+		lastName: "",
+		email: "", // hacer validacion de ambos emails
+		confirmEmail: "",
+		phone: "",
+	});
+
+	const handleChange = (ev) => {
+		const { name, value } = ev.target;
+		setOrder({ ...order, [name]: value });
+	};
+
+	const checkValidation = () => {
+		let errors = validation;
+
+		//first Name validation
+		if (!order.name.trim()) {
+			errors.name = "Tu/s nombre/s son requeridos";
+			setFormIsValid(false);
+		} else {
+			errors.name = "";
+			setFormIsValid(true);
+		}
+
+		//last Name validation
+		if (!order.lastName.trim()) {
+			errors.lastName = "Tu apellido es requerido";
+			setFormIsValid(false);
+		} else {
+			errors.lastName = "";
+			setFormIsValid(true);
+		}
+
+		//phone validation
+		if (!order.phone.trim()) {
+			errors.phone = "Un teléfono es requerido";
+			setFormIsValid(false);
+		} else {
+			errors.phone = "";
+			setFormIsValid(true);
+		}
+
+		//match email validation
+		if (!order.confirmEmail) {
+			errors.confirmEmail = "Tienes que confirmar tu email";
+		} else if (order.confirmEmail !== order.email) {
+			errors.confirmEmail = "El email no coincide con el anterior";
+		} else {
+			errors.confirmEmail = "";
+			setFormIsValid(true);
+		}
+
+		// email validation
+		const emailRegex =
+			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+		if (!order.email.trim()) {
+			errors.email = "Email es requerido";
+			setFormIsValid(false);
+		} else if (!order.email.match(emailRegex)) {
+			errors.email = "Por favor, ingresa un email válido";
+			setFormIsValid(false);
+		} else {
+			errors.email = "";
+			setFormIsValid(true);
+		}
+
+		setValidation(errors);
+	};
+
+	useEffect(() => {
+		checkValidation();
+	}, [order]);
 
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
@@ -31,17 +103,21 @@ const PurcheseCheckout = () => {
 	};
 
 	const formatPurchaseData = () => {
-		return { ...purchaseDetails, buyer: { ...state } };
+		return { ...purchaseDetails, buyer: { ...order } };
 	};
 
-	const checkEmail = (emailToConfirm) => {
-		return emailToConfirm === state.email;
+	const purchaseEnded = () => {
+		return (
+			<p>
+				Gracias por tu compra! Tu código de pedido es:{" "}
+				<strong>{orderId}</strong>
+			</p>
+		);
 	};
 
-	return (
-		<>
-			<NavigationButton route='../cart' />
-			<div className='container'>
+	const purchaseForm = () => {
+		return (
+			<>
 				<h2>Datos de envío</h2>
 				<hr />
 				<div className='form-wrapper'>
@@ -49,58 +125,90 @@ const PurcheseCheckout = () => {
 						<div className='form-group'>
 							<label htmlFor='name'>Nombre: </label>
 							<input
-								id='name'
-								className='form-control'
+								name='name'
+								className={
+									validation.name ? "form-control is-invalid" : "form-control"
+								}
 								type='text'
-								onChange={(e) => setState({ ...state, name: e.target.value })}
+								onChange={(e) => handleChange(e)}
+								value={order.name}
 							/>
+							{validation.name && (
+								<p className='error-message'>{validation.name}</p>
+							)}
 						</div>
 						<div className='form-group pt-3'>
 							<label htmlFor='name'>Apellido: </label>
 							<input
-								id='name'
-								className='form-control'
-								type='text'
-								onChange={(e) =>
-									setState({ ...state, lastName: e.target.value })
+								name='lastName'
+								className={
+									validation.lastName
+										? "form-control is-invalid"
+										: "form-control"
 								}
+								type='text'
+								onChange={(e) => handleChange(e)}
+								value={order.lastName}
 							/>
+							{validation.lastName && (
+								<p className='error-message'>{validation.lastName}</p>
+							)}
 						</div>
 						<div className='form-group pt-3'>
 							<label htmlFor='phone'>Teléfono: </label>
 							<input
-								id='phone'
-								className='form-control'
+								name='phone'
+								className={
+									validation.phone ? "form-control is-invalid" : "form-control"
+								}
 								type='tel'
-								onChange={(e) => setState({ ...state, phone: e.target.value })}
+								onChange={(e) => handleChange(e)}
+								value={order.phone}
 							/>
+							{validation.phone && (
+								<p className='error-message'>{validation.phone}</p>
+							)}
 						</div>
 						<div className='form-group pt-3'>
 							<label htmlFor='email'>E-Mail: </label>
 							<input
-								id='email'
-								className='form-control'
+								name='email'
+								className={
+									validation.email ? "form-control is-invalid" : "form-control"
+								}
 								type='email'
 								placeholder='example@example.com'
-								onChange={(e) => setState({ ...state, email: e.target.value })}
+								onChange={(e) => handleChange(e)}
+								value={order.email}
 							/>
+							{validation.email && (
+								<p className='error-message'>{validation.email}</p>
+							)}
 						</div>
 
 						<div className='form-group pt-3'>
 							<label htmlFor='email'>Confirmar E-Mail: </label>
 							<input
-								id='email'
-								className='form-control'
+								name='confirmEmail'
+								className={
+									validation.confirmEmail
+										? "form-control is-invalid"
+										: "form-control"
+								}
 								type='email'
 								placeholder='example@example.com'
-								onChange={(e) => checkEmail(e.target.value)}
+								onChange={(e) => handleChange(e)}
+								value={order.confirmEmail}
 							/>
+							{validation.confirmEmail && (
+								<p className='error-message'>{validation.confirmEmail}</p>
+							)}
 						</div>
 
 						<button
 							type='submit'
 							className='btn btn-primary mt-3'
-							disabled={!formIsValid ? true : false}
+							disabled={!formIsValid}
 						>
 							Finalizar compra
 						</button>
@@ -116,12 +224,16 @@ const PurcheseCheckout = () => {
 						<hr />
 						<p>${purchaseDetails.amount}</p>
 					</div>
-					{orderId && (
-						<strong>
-							Gracias por tu compra! Tu código de pedido es: {orderId}
-						</strong>
-					)}
 				</div>
+			</>
+		);
+	};
+
+	return (
+		<>
+			<NavigationButton route='../cart' />
+			<div className='container'>
+				{orderId ? purchaseEnded() : purchaseForm()}
 			</div>
 			;
 		</>

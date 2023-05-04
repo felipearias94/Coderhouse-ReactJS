@@ -11,3 +11,7 @@
 	width: 40%;
 	text-align: center;
 }
+
+.error-message {
+	color: red;
+}
