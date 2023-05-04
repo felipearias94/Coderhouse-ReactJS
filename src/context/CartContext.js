@@ -33,7 +33,7 @@ export const CartProvider = ({ children }) => {
 	const clearCart = () => {
 		setCart([]);
 		setCartTotal(0);
-		showToaster('error', 'Se vació el carrito!');
+		showToaster('info', 'Se vació el carrito!');
 	};
 
 	const updateCartTotalItem = (newCartItems) => {

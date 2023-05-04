@@ -1,24 +1,27 @@
+import { CartContext } from "../../context/CartContext";
 import { endPurchase } from "../../services/FirebaseService";
 import NavigationButton from "../shared/NavigationButton/NavigationButton";
 import { showToaster } from "../shared/UxResources/Toaster";
+import PurchaseDone from "../assets/transaction-done.png";
 import "./PurchaseCheckout.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 const PurcheseCheckout = () => {
 	const purchaseDetails = JSON.parse(sessionStorage.getItem("purchase"));
+	const { clearCart } = useContext(CartContext);
 	const [orderId, setOrderId] = useState("");
 	const [formIsValid, setFormIsValid] = useState(false);
 	const [order, setOrder] = useState({
 		name: "",
 		lastName: "",
-		email: "", // hacer validacion de ambos emails
+		email: "",
 		confirmEmail: "",
 		phone: "",
 	});
 	const [validation, setValidation] = useState({
 		name: "",
 		lastName: "",
-		email: "", // hacer validacion de ambos emails
+		email: "",
 		confirmEmail: "",
 		phone: "",
 	});
@@ -95,7 +98,7 @@ const PurcheseCheckout = () => {
 			.then((docRef) => {
 				showToaster("success", "Compra registrada!!");
 				setOrderId(docRef.id);
-				//vaciar carrito acá
+				clearCart();
 			})
 			.catch(() => {
 				showToaster("error", "Algo sucedió");
@@ -108,10 +111,19 @@ const PurcheseCheckout = () => {
 
 	const purchaseEnded = () => {
 		return (
-			<p>
-				Gracias por tu compra! Tu código de pedido es:{" "}
-				<strong>{orderId}</strong>
-			</p>
+			<div className='purchase-ended'>
+				<img src={PurchaseDone} alt='' />
+				<p>
+					Gracias por tu compra! Tu código de pedido es:
+					<strong>{orderId}</strong>
+				</p>
+				<NavigationButton
+					route={"/"}
+					goBack={false}
+					label={"Vovler al inicio"}
+					fullWidth={true}
+				/>
+			</div>
 		);
 	};
 
