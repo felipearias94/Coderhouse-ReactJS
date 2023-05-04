@@ -8,8 +8,7 @@
 }
 
 .purchase-details {
-	width: 40%;
-	text-align: center;
+	width: 50%;
 }
 
 .purchase-ended {
@@ -26,4 +25,23 @@
 
 .error-message {
 	color: red;
+}
+
+@media (max-width: 600px) {
+	.form-wrapper {
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	.form-wrapper > form {
+		width: 100%;
+	}
+
+	.form-wrapper > form > button {
+		width: 100%;
+	}
+
+	.purchase-details {
+		width: 100%;
+	}
 }

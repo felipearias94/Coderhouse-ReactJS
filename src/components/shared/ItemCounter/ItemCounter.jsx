@@ -3,7 +3,7 @@ import "./ItemCounter.css";
 import ActionButton from "../ActionButton/ActionButton";
 import NavigationButton from "../NavigationButton/NavigationButton";
 
-const ItemCounter = ({ min, max, onAdd, showNavigation }) => {
+const ItemCounter = ({ max, onAdd, showNavigation }) => {
 	const [counter, setCounter] = useState(1);
 
 	const increaseHandler = (amount) => {

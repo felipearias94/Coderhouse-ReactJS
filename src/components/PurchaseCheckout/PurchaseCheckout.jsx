@@ -225,21 +225,43 @@ const PurcheseCheckout = () => {
 							Finalizar compra
 						</button>
 					</form>
-					<div className='purchase-details'>
-						{purchaseDetails.products.map((cart) => (
-							<div key={cart.item.id}>
-								<p>{cart.item.name}</p>
-								<p>x {cart.quantity}</p>
-								<p>$ {cart.item.price}</p>
-							</div>
-						))}
-						<hr />
-						<p>${purchaseDetails.amount}</p>
-					</div>
+					{orderDetails()}
 				</div>
 			</>
 		);
 	};
+
+	const orderDetails = () => {
+		return (
+			<table class='table border-bottom purchase-details '>
+				<tbody>
+					{purchaseDetails.products.map((cart) => (
+						<tr key={cart.item.id} scope='row'>
+							<td>{cart.item.name}</td>
+							<td>x {cart.quantity}</td>
+							<td>$ {cart.item.price}</td>
+						</tr>
+					))}
+					<tr>
+						<th colSpan={2}>Total: </th>
+						<td> ${purchaseDetails.amount}</td>
+					</tr>
+				</tbody>
+			</table>
+		);
+	};
+
+	/* {/* <div className='purchase-details'>
+				{purchaseDetails.products.map((cart) => (
+					<div key={cart.item.id}>
+						<p>{cart.item.name}</p>
+						<p>x {cart.quantity}</p>
+						<p>$ {cart.item.price}</p>
+					</div>
+				))}
+				<hr />
+				<p>${purchaseDetails.amount}</p>
+			</div> */
 
 	return (
 		<>
