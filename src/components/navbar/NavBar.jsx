@@ -1,12 +1,12 @@
 import "./NavBar.css";
 import brandLogo from "../assets/brandLogo.png";
-import CartWidget from "../cartWidget/CartWidget";
+import CartWidget from "../shared/cartWidget/CartWidget";
 import NavButtons from "./NavButtons";
 import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
 	return (
-		<nav className='navbar navbar-expand-lg bg-body-tertiary'>
+		<nav className='navbar sticky-top navbar-expand-lg p-2 text-dark '>
 			<div className='container-fluid'>
 				<Link to={"/"} className='navbar-brand'>
 					<img
@@ -37,8 +37,9 @@ const NavBar = () => {
 						<NavLink to={"/category/2"}>
 							<NavButtons label='Cajones' />
 						</NavLink>
-
-						<CartWidget itemCounter={0} />
+						<NavLink to={"/cart"}>
+							<CartWidget itemCounter={0} />
+						</NavLink>
 					</ul>
 				</div>
 			</div>

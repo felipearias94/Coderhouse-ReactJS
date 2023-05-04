@@ -1,0 +1,113 @@
+.empty-cart {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.empty-cart > img {
+	width: 50%;
+	max-width: 250px;
+	height: auto;
+}
+
+button {
+	max-width: 300px;
+}
+
+.empty-cart > h2 {
+	font-size: 22px;
+	font-weight: normal;
+	margin: 2rem 0 1rem;
+}
+
+#full-cart {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#full-cart td,
+#full-cart th {
+	width: 25%;
+	padding: 8px;
+}
+
+#full-cart td:nth-child(2) {
+	width: 10%;
+}
+
+#full-cart tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#full-cart th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+}
+
+tr:last-child {
+	border-top: 1px solid gray;
+	padding-top: 3rem;
+}
+
+.item-data > td > img {
+	width: 10%;
+	min-width: 50px;
+	height: auto;
+}
+
+#table-total > tr > th {
+	text-align: right;
+	padding-right: 30px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#table-total td {
+	font-weight: bold;
+	font-size: 19px;
+}
+
+#removable {
+	text-align: center;
+}
+
+th.delete-item,
+td.delete-item {
+	width: 6% !important;
+}
+
+.delete-item button img {
+	width: 30px;
+}
+
+.btn-outline:hover {
+	background-color: #e57373;
+}
+
+.actions {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	gap: 3rem;
+}
+
+@media (max-width: 600px) {
+	.container {
+		max-width: 95%;
+	}
+
+	.item-data > td > img {
+		display: none;
+	}
+
+	#removable {
+		display: none;
+	}
+
+	.actions {
+		flex-direction: column;
+		gap: 1rem;
+		align-items: center;
+	}
+}

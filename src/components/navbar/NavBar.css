@@ -2,6 +2,10 @@
 	align-items: center;
 }
 
+nav {
+	background-color: #bbd6b8;
+}
+
 .nav-item {
 	cursor: pointer;
 }

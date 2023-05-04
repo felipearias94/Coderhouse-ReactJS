@@ -1,0 +1,19 @@
+.wrapper {
+	position: relative;
+	height: auto;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+@media (max-width: 600px) {
+	.wrapper {
+		width: 100%;
+		position: relative;
+	}
+	.wrapper > img {
+		width: inherit;
+	}
+}

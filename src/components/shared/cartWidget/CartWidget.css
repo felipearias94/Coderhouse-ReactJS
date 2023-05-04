@@ -1,7 +1,9 @@
 .shopping-cart {
 	position: absolute;
-	right: 1.8rem;
+	right: 2.5rem;
+	bottom: 1rem;
 	cursor: pointer;
+	color: black;
 }
 
 .shopping-cart > img {

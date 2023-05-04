@@ -1,0 +1,35 @@
+.counter-wrapper {
+	display: flex;
+	justify-content: flex-end;
+	clear: both;
+	width: inherit;
+	height: auto;
+	align-items: center;
+	position: static;
+	padding: 0px 10px 5px 10px;
+}
+
+@media (max-width: 600px) {
+	.counter-wrapper {
+		display: block;
+	}
+	input {
+		width: 29%;
+	}
+}
+
+.btn-outline-secondary {
+	border-radius: 50%;
+	width: fit-content;
+	margin: 16px;
+}
+
+input {
+	text-align: center;
+	cursor: default;
+	width: 20%;
+}
+
+.disabled:hover {
+	cursor: not-allowed !important;
+}
