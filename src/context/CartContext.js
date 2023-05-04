@@ -5,7 +5,7 @@ export const CartContext = createContext({ cart: [] });
 
 export const CartProvider = ({ children }) => {
 	const [cart, setCart] = useState(JSON.parse(sessionStorage.getItem('cart')) || []);
-	const [cartTotal, setCartTotal] = useState(sessionStorage.getItem('cartTotal') || 0);
+	const [cartTotal, setCartTotal] = useState(Number(sessionStorage.getItem('cartTotal')) || 0);
 
 	useEffect(() => {
 		updateSessionStorage();
@@ -16,7 +16,7 @@ export const CartProvider = ({ children }) => {
 			showToaster('error', 'Ya está en el carrito');
 			return;
 		}
-		setCartTotal(cartTotal + quantity);
+		setCartTotal(current => { return current + quantity });
 		setCart((prev) => [...prev, { item, quantity }]);
 		updateSessionStorage();
 		const toastMessage = quantity === 1 ? `Agregaste un item al carrito!` : `Agregaste ${quantity} items al carrito!`
