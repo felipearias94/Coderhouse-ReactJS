@@ -1,3 +1,16 @@
+# EL VERGEL e-Commerce
+
+¡Bienvenidos a mi aplicación web de e-Commerce! Esta plataforma ha sido diseñada para el curso de ReactJS de Coderhouse. Me basé en un emprendimiento familiar de hortalizas y verduras hidropónicas. Además, permite una navegación intuitiva y una búsqueda precisa para encontrar los productos deseados. 
+
+La aplicación se encuentr hosteada en: [Este link](https://elvergel.netlify.app/). 
+
+Las imágenes son puramente ilustrativas.
+
+# Dependencias extras
+- bootstrap-icons
+- firebase
+- react-toastify
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
