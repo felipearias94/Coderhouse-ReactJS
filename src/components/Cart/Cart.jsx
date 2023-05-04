@@ -1,25 +1,20 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import "./Cart.css";
 import { CartContext } from "../../context/CartContext";
 import deleteIcon from "../assets/icons/delete-icon.svg";
 import ActionButton from "../shared/ActionButton/ActionButton";
 import emptyCart from "../assets/emptyCart.png";
-import { useState, useEffect } from "react";
 import NavigationButton from "../shared/NavigationButton/NavigationButton";
 
 const Cart = () => {
 	const context = useContext(CartContext);
-	const [colSpanSize, setColSpanSize] = useState(4);
-	useEffect(() => {
-		window.addEventListener("resize", isMobile);
-		return () => {
-			window.removeEventListener("resize", isMobile);
-		};
-	});
+	let colSpanSize = 4;
 
 	const isMobile = () => {
-		window.innerWidth >= 768 ? setColSpanSize(4) : setColSpanSize(3);
+		window.innerWidth >= 768 ? (colSpanSize = 4) : (colSpanSize = 3);
 	};
+
+	useMemo(() => isMobile());
 
 	const clearCartItems = () => {
 		context.clearCart();

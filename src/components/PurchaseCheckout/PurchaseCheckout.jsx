@@ -106,7 +106,15 @@ const PurcheseCheckout = () => {
 	};
 
 	const formatPurchaseData = () => {
-		return { ...purchaseDetails, buyer: { ...order } };
+		return {
+			...purchaseDetails,
+			buyer: {
+				name: order.name,
+				lastName: order.lastName,
+				email: order.email,
+				phone: order.phone,
+			},
+		};
 	};
 
 	const purchaseEnded = () => {
