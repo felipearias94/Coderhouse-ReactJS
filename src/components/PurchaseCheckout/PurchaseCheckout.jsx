@@ -14,6 +14,7 @@ const PurcheseCheckout = () => {
 		email: "", // hacer validacion de ambos emails
 		phone: "",
 	});
+	
 	let formIsValid = true;
 
 	const formSubmitHandler = (e) => {
