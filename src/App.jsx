@@ -11,6 +11,7 @@ import NotFoundPage from "./components/shared/NotFoundPage/NotFoundPage";
 import Cart from "./components/Cart/Cart";
 import { CartProvider } from "./context/CartContext";
 import { ToastContainer } from "react-toastify";
+import Footer from "./components/shared/Footer/Footer";
 
 function App() {
 	return (
@@ -34,6 +35,7 @@ function App() {
 					</Routes>
 				</CartProvider>
 			</BrowserRouter>
+			<Footer />
 			<ToastContainer />
 		</>
 	);

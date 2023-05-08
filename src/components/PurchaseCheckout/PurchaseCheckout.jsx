@@ -259,25 +259,12 @@ const PurcheseCheckout = () => {
 		);
 	};
 
-	/* {/* <div className='purchase-details'>
-				{purchaseDetails.products.map((cart) => (
-					<div key={cart.item.id}>
-						<p>{cart.item.name}</p>
-						<p>x {cart.quantity}</p>
-						<p>$ {cart.item.price}</p>
-					</div>
-				))}
-				<hr />
-				<p>${purchaseDetails.amount}</p>
-			</div> */
-
 	return (
 		<>
 			<NavigationButton route='../cart' />
 			<div className='container'>
 				{orderId ? purchaseEnded() : purchaseForm()}
 			</div>
-			;
 		</>
 	);
 };

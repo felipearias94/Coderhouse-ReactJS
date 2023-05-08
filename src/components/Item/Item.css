@@ -2,6 +2,11 @@
 	padding: 10px;
 }
 
+.card:hover {
+	transform: scale(1.05);
+	cursor: pointer;
+}
+
 .card-title {
 	font-family: "ElVergel-Bold";
 	font-size: 22px;

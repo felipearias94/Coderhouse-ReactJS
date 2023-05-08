@@ -1,6 +1,9 @@
 body {
 	font-family: "ElVergel-light";
 	background-color: #ededed;
+	position: relative;
+	padding-bottom: 40vh;
+	min-height: 100vh;
 }
 
 .App {
