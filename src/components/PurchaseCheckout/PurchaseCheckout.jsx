@@ -10,7 +10,7 @@ const PurcheseCheckout = () => {
 	const purchaseDetails = JSON.parse(sessionStorage.getItem("purchase"));
 	const { clearCart } = useContext(CartContext);
 	const [orderId, setOrderId] = useState("");
-	const [formIsValid, setFormIsValid] = useState(false);
+	const [isSubmit, setIsSubmit] = useState(false);
 	const [order, setOrder] = useState({
 		name: "",
 		lastName: "",
@@ -18,47 +18,39 @@ const PurcheseCheckout = () => {
 		confirmEmail: "",
 		phone: "",
 	});
-	const [validation, setValidation] = useState({
-		name: "",
-		lastName: "",
-		email: "",
-		confirmEmail: "",
-		phone: "",
-	});
+	const [formErrors, setFormErrors] = useState({});
 
 	const handleChange = (ev) => {
 		const { name, value } = ev.target;
 		setOrder({ ...order, [name]: value });
 	};
 
-	const checkValidation = () => {
-		let errors = validation;
+	const checkValidation = (order) => {
+		const errors = {};
+		const emailRegex =
+			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 		//first Name validation
-		if (!order.name.trim()) {
+		if (!order.name) {
 			errors.name = "Tu/s nombre/s son requeridos";
-			setFormIsValid(false);
-		} else {
-			errors.name = "";
-			setFormIsValid(true);
 		}
 
 		//last Name validation
-		if (!order.lastName.trim()) {
+		if (!order.lastName) {
 			errors.lastName = "Tu apellido es requerido";
-			setFormIsValid(false);
-		} else {
-			errors.lastName = "";
-			setFormIsValid(true);
 		}
 
 		//phone validation
-		if (!order.phone.trim()) {
+		if (!order.phone) {
 			errors.phone = "Un teléfono es requerido";
-			setFormIsValid(false);
-		} else {
-			errors.phone = "";
-			setFormIsValid(true);
+		}
+
+		// email validation
+
+		if (!order.email) {
+			errors.email = "Email es requerido";
+		} else if (!order.email.match(emailRegex)) {
+			errors.email = "Por favor, ingresa un email válido";
 		}
 
 		//match email validation
@@ -66,43 +58,31 @@ const PurcheseCheckout = () => {
 			errors.confirmEmail = "Tienes que confirmar tu email";
 		} else if (order.confirmEmail !== order.email) {
 			errors.confirmEmail = "El email no coincide con el anterior";
-		} else {
-			errors.confirmEmail = "";
-			setFormIsValid(true);
 		}
-
-		// email validation
-		const emailRegex =
-			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-		if (!order.email.trim()) {
-			errors.email = "Email es requerido";
-			setFormIsValid(false);
-		} else if (!order.email.match(emailRegex)) {
-			errors.email = "Por favor, ingresa un email válido";
-			setFormIsValid(false);
-		} else {
-			errors.email = "";
-			setFormIsValid(true);
-		}
-
-		setValidation(errors);
+		setIsSubmit(Object.keys(formErrors).length === 0);
+		return errors;
 	};
 
 	useEffect(() => {
-		checkValidation();
+		setIsSubmit((current) => {
+			return current && Object.keys(formErrors).length === 0;
+		});
 	}, [order]);
 
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
-		endPurchase(formatPurchaseData())
-			.then((docRef) => {
-				showToaster("success", "Compra registrada!!");
-				setOrderId(docRef.id);
-				clearCart();
-			})
-			.catch(() => {
-				showToaster("error", "Algo sucedió");
-			});
+		setFormErrors(checkValidation(order));
+		if (isSubmit) {
+			endPurchase(formatPurchaseData())
+				.then((docRef) => {
+					showToaster("success", "Compra registrada!!");
+					setOrderId(docRef.id);
+					clearCart();
+				})
+				.catch(() => {
+					showToaster("error", "Algo sucedió");
+				});
+		}
 	};
 
 	const formatPurchaseData = () => {
@@ -147,14 +127,14 @@ const PurcheseCheckout = () => {
 							<input
 								name='name'
 								className={
-									validation.name ? "form-control is-invalid" : "form-control"
+									formErrors.name ? "form-control is-invalid" : "form-control"
 								}
 								type='text'
 								onChange={(e) => handleChange(e)}
 								value={order.name}
 							/>
-							{validation.name && (
-								<p className='error-message'>{validation.name}</p>
+							{formErrors.name && (
+								<p className='error-message'>{formErrors.name}</p>
 							)}
 						</div>
 						<div className='form-group pt-3'>
@@ -162,7 +142,7 @@ const PurcheseCheckout = () => {
 							<input
 								name='lastName'
 								className={
-									validation.lastName
+									formErrors.lastName
 										? "form-control is-invalid"
 										: "form-control"
 								}
@@ -170,8 +150,8 @@ const PurcheseCheckout = () => {
 								onChange={(e) => handleChange(e)}
 								value={order.lastName}
 							/>
-							{validation.lastName && (
-								<p className='error-message'>{validation.lastName}</p>
+							{formErrors.lastName && (
+								<p className='error-message'>{formErrors.lastName}</p>
 							)}
 						</div>
 						<div className='form-group pt-3'>
@@ -179,14 +159,14 @@ const PurcheseCheckout = () => {
 							<input
 								name='phone'
 								className={
-									validation.phone ? "form-control is-invalid" : "form-control"
+									formErrors.phone ? "form-control is-invalid" : "form-control"
 								}
 								type='tel'
 								onChange={(e) => handleChange(e)}
 								value={order.phone}
 							/>
-							{validation.phone && (
-								<p className='error-message'>{validation.phone}</p>
+							{formErrors.phone && (
+								<p className='error-message'>{formErrors.phone}</p>
 							)}
 						</div>
 						<div className='form-group pt-3'>
@@ -194,15 +174,15 @@ const PurcheseCheckout = () => {
 							<input
 								name='email'
 								className={
-									validation.email ? "form-control is-invalid" : "form-control"
+									formErrors.email ? "form-control is-invalid" : "form-control"
 								}
 								type='email'
 								placeholder='example@example.com'
 								onChange={(e) => handleChange(e)}
 								value={order.email}
 							/>
-							{validation.email && (
-								<p className='error-message'>{validation.email}</p>
+							{formErrors.email && (
+								<p className='error-message'>{formErrors.email}</p>
 							)}
 						</div>
 
@@ -211,7 +191,7 @@ const PurcheseCheckout = () => {
 							<input
 								name='confirmEmail'
 								className={
-									validation.confirmEmail
+									formErrors.confirmEmail
 										? "form-control is-invalid"
 										: "form-control"
 								}
@@ -220,16 +200,12 @@ const PurcheseCheckout = () => {
 								onChange={(e) => handleChange(e)}
 								value={order.confirmEmail}
 							/>
-							{validation.confirmEmail && (
-								<p className='error-message'>{validation.confirmEmail}</p>
+							{formErrors.confirmEmail && (
+								<p className='error-message'>{formErrors.confirmEmail}</p>
 							)}
 						</div>
 
-						<button
-							type='submit'
-							className='btn btn-primary mt-3'
-							disabled={!formIsValid}
-						>
+						<button type='submit' className='btn btn-primary mt-3'>
 							Finalizar compra
 						</button>
 					</form>
