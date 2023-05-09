@@ -70,8 +70,7 @@ const PurcheseCheckout = () => {
 		e.preventDefault();
 		checkValidation();
 		if (isFormValid) {
-			console.log("submited");
-			/* endPurchase(formatPurchaseData())
+			endPurchase(formatPurchaseData())
 				.then((docRef) => {
 					showToaster("success", "Compra registrada!!");
 					setOrderId(docRef.id);
@@ -79,7 +78,7 @@ const PurcheseCheckout = () => {
 				})
 				.catch(() => {
 					showToaster("error", "Algo sucedió");
-				}); */
+				});
 		}
 	};
 
