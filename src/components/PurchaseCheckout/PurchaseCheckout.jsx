@@ -4,13 +4,13 @@ import NavigationButton from "../shared/NavigationButton/NavigationButton";
 import { showToaster } from "../shared/UxResources/Toaster";
 import PurchaseDone from "../assets/transaction-done.png";
 import "./PurchaseCheckout.css";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 
 const PurcheseCheckout = () => {
 	const purchaseDetails = JSON.parse(sessionStorage.getItem("purchase"));
 	const { clearCart } = useContext(CartContext);
 	const [orderId, setOrderId] = useState("");
-	const [isSubmit, setIsSubmit] = useState(false);
+	let isFormValid = false;
 	const [order, setOrder] = useState({
 		name: "",
 		lastName: "",
@@ -22,10 +22,12 @@ const PurcheseCheckout = () => {
 
 	const handleChange = (ev) => {
 		const { name, value } = ev.target;
-		setOrder({ ...order, [name]: value });
+		setOrder((current) => {
+			return { ...current, [name]: value };
+		});
 	};
 
-	const checkValidation = (order) => {
+	const checkValidation = () => {
 		const errors = {};
 		const emailRegex =
 			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -59,21 +61,17 @@ const PurcheseCheckout = () => {
 		} else if (order.confirmEmail !== order.email) {
 			errors.confirmEmail = "El email no coincide con el anterior";
 		}
-		setIsSubmit(Object.keys(formErrors).length === 0);
-		return errors;
-	};
 
-	useEffect(() => {
-		setIsSubmit((current) => {
-			return current && Object.keys(formErrors).length === 0;
-		});
-	}, [order]);
+		setFormErrors(errors);
+		isFormValid = Object.keys(errors).length === 0;
+	};
 
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
-		setFormErrors(checkValidation(order));
-		if (isSubmit) {
-			endPurchase(formatPurchaseData())
+		checkValidation();
+		if (isFormValid) {
+			console.log("submited");
+			/* endPurchase(formatPurchaseData())
 				.then((docRef) => {
 					showToaster("success", "Compra registrada!!");
 					setOrderId(docRef.id);
@@ -81,7 +79,7 @@ const PurcheseCheckout = () => {
 				})
 				.catch(() => {
 					showToaster("error", "Algo sucedió");
-				});
+				}); */
 		}
 	};
 
