@@ -21,7 +21,7 @@ const Footer = () => {
 						href='/'
 						className='mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1'
 					>
-						<img className='logo' src={elVergelLogo} alt='' srcset='' />
+						<img className='logo' src={elVergelLogo} alt='El Vergel' />
 					</a>
 					<span className='mb-3 mb-md-0 text-body-secondary'>
 						&copy; Finca El Vergel, hidroponia - {currentYear}
