@@ -3,27 +3,28 @@ import "./ItemCounter.css";
 import ActionButton from "../ActionButton/ActionButton";
 import NavigationButton from "../NavigationButton/NavigationButton";
 
-const ItemCounter = ({ max, onAdd, showNavigation }) => {
+const ItemCounter = ({ min, max, onAdd, showNavigation }) => {
 	const [counter, setCounter] = useState(1);
 
-	const increaseHandler = (amount) => {
-		setCounter((currentValue) => {
-			return currentValue + amount;
-		});
+	const increaseHandler = () => {
+		if (counter < max) setCounter(counter + 1);
+	};
+	const decreaseHandler = () => {
+		if (counter > min) setCounter(counter - 1);
 	};
 
 	return (
 		<div className='counter-wrapper'>
 			<button
 				className={"btn btn-outline-secondary " + (max <= 1 ? "disabled" : "")}
-				onClick={() => increaseHandler(-1)}
+				onClick={() => decreaseHandler()}
 			>
 				-
 			</button>
 			<input readOnly={true} value={counter}></input>
 			<button
 				className={"btn btn-outline-secondary " + (max <= 1 ? "disabled" : "")}
-				onClick={() => increaseHandler(1)}
+				onClick={() => increaseHandler()}
 			>
 				+
 			</button>
