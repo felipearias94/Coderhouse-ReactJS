@@ -1,0 +1,17 @@
+.alert-wrapper {
+	border: 2px #f94449 solid;
+    padding: 8px;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	background-color: rgb(246, 198, 198);
+}
+
+.alert-wrapper > img {
+	width: 35px;
+	padding-right: 10px;
+}
+
+.alert-wrapper > span {
+	color: red;
+}

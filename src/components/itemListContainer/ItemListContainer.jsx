@@ -7,8 +7,10 @@ import {
 import ItemList from "../ItemList/ItemList";
 import Loader from "../shared/Loader/Loader";
 import "./ItemListContainer.css";
+import { useAuth } from "../../context/AuthContext";
 
 function ItemListContainer({ greetings }) {
+	const auth = useAuth();
 	const [products, setProducts] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(true);
 	const { categoryId } = useParams();
@@ -29,7 +31,7 @@ function ItemListContainer({ greetings }) {
 
 	return (
 		<>
-			{isLoaded ? (
+			{auth.loading ? (
 				<Loader isLoaded={isLoaded} />
 			) : (
 				<div>

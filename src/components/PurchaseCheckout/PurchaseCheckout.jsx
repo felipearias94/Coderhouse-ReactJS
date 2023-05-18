@@ -5,9 +5,11 @@ import { showToaster } from "../shared/UxResources/Toaster";
 import PurchaseDone from "../assets/transaction-done.png";
 import "./PurchaseCheckout.css";
 import { useState, useContext } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const PurcheseCheckout = () => {
 	const purchaseDetails = JSON.parse(sessionStorage.getItem("purchase"));
+	const { user } = useAuth();
 	const { clearCart } = useContext(CartContext);
 	const [orderId, setOrderId] = useState("");
 	let isFormValid = false;
@@ -201,8 +203,17 @@ const PurcheseCheckout = () => {
 								<p className='error-message'>{formErrors.confirmEmail}</p>
 							)}
 						</div>
+						{!user && (
+							<p>
+								Para realizar la compra, primero debes <a href="/login">iniciar sesión</a>.
+							</p>
+						)}
 
-						<button type='submit' className='btn btn-primary mt-3'>
+						<button
+							type='submit'
+							className='btn btn-primary mt-3'
+							disabled={!user}
+						>
 							Finalizar compra
 						</button>
 					</form>
