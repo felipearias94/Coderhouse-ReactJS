@@ -12,28 +12,40 @@ import Cart from "./components/Cart/Cart";
 import { CartProvider } from "./context/CartContext";
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/shared/Footer/Footer";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./services/ProtectedRoutes/ProtectedRoute";
 
 function App() {
 	return (
 		<>
 			<BrowserRouter>
-				<CartProvider>
-					<NavBar />
-					<Routes>
-						<Route
-							path='/'
-							element={<ItemListContainer greetings={"Bienvenido"} />}
-						/>
-						<Route
-							path='/category/:categoryId'
-							element={<ItemListContainer greetings={"Bienvenido"} />}
-						/>
-						<Route path='/item/:itemId' element={<ItemDetailContainer />} />
-						<Route path='/cart' element={<Cart />} />
-						<Route path='/cart/checkout/' element={<PurchaseCheckout />} />
-						<Route path='*' element={<NotFoundPage />} />
-					</Routes>
-				</CartProvider>
+				<AuthProvider>
+					<CartProvider>
+						<NavBar />
+						<Routes>
+							<Route
+								path='/'
+								element={<ItemListContainer greetings={"Bienvenido"} />}
+							/>
+							<Route path='/login' element={<Login />} />
+							<Route path='/register' element={<Register />} />
+							<Route
+								path='/category/:categoryId'
+								element={<ItemListContainer greetings={"Bienvenido"} />}
+							/>
+							<Route path='/item/:itemId' element={<ItemDetailContainer />} />
+							<Route path='/cart' element={<Cart />} />
+							<Route path='/cart/checkout/' element={
+								<ProtectedRoute>
+									<PurchaseCheckout />
+								</ProtectedRoute>
+							} />
+							<Route path='*' element={<NotFoundPage />} />
+						</Routes>
+					</CartProvider>
+				</AuthProvider>
 			</BrowserRouter>
 			<Footer />
 			<ToastContainer />

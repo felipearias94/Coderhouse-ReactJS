@@ -9,7 +9,6 @@ import {
     runTransaction,
 } from "firebase/firestore";
 import { dataBase } from "./firebase/config";
-import { showToaster } from "../components/shared/UxResources/Toaster";
 
 export const getProducts = () => {
     return getDocs(collection(dataBase, "items"));
