@@ -34,14 +34,16 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const signUp = async (credentials) => {
-        await createUserWithEmailAndPassword(
+        const { email, password } = credentials;
+
+        const { user: newUser } = await createUserWithEmailAndPassword(
             auth,
-            credentials.email,
-            credentials.password,
+            email,
+            password
         );
 
-        sendEmailVerification(user);
-    }
+        await sendEmailVerification(newUser);
+    };
 
     const login = (credentials) =>
         signInWithEmailAndPassword(auth, credentials.email, credentials.password);
