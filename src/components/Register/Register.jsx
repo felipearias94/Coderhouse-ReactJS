@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Alert from "../shared/Alert/Alert";
 
 const Register = () => {
 	const { signUp, sendVerificationEmail } = useAuth();
@@ -20,7 +21,6 @@ const Register = () => {
 		setError("");
 		try {
 			await signUp(userCredentials);
-			await sendVerificationEmail();
 			navigate("/");
 		} catch (error) {
 			if (error.code === "auth/internal-error") {
@@ -36,11 +36,11 @@ const Register = () => {
 	};
 
 	return (
-		<div>
-			{error && <p>{error}</p>}
+		<div className='container'>
 			<form onSubmit={handleSubmit}>
 				<label htmlFor='email'>Email</label>
 				<input
+					className='form-control mb-3'
 					type='email'
 					name='email'
 					id='email'
@@ -48,14 +48,18 @@ const Register = () => {
 					onChange={handlerChange}
 				/>
 
-				<label htmlFor='password'></label>
+				<label htmlFor='password'>Contraseña</label>
 				<input
+					className='form-control mb-3'
 					type='password'
 					name='password'
 					id='password'
 					onChange={handlerChange}
 				/>
-				<button type='submit'>Registrarse</button>
+				{error && <Alert message={error} />}
+				<button className='btn btn-primary mt-3' type='submit'>
+					Registrarse
+				</button>
 			</form>
 		</div>
 	);

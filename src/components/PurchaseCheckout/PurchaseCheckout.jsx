@@ -218,7 +218,7 @@ const PurcheseCheckout = () => {
 						</button>
 					</form>
 					{orderDetails()}
-				</div>//1.27
+				</div>
 			</>
 		);
 	};

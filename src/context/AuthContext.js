@@ -1,11 +1,13 @@
 import { useState, createContext, useEffect, useContext } from "react";
 import { showToaster } from "../components/shared/UxResources/Toaster";
 import {
+    GoogleAuthProvider,
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     sendEmailVerification,
     signInWithEmailAndPassword,
     signOut,
+    signInWithPopup
 } from "firebase/auth";
 import { auth } from "../services/firebase/config";
 
@@ -31,22 +33,29 @@ export const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-    const signUp = (credentials) =>
-        createUserWithEmailAndPassword(
+    const signUp = async (credentials) => {
+        await createUserWithEmailAndPassword(
             auth,
             credentials.email,
             credentials.password,
         );
 
+        sendEmailVerification(user);
+    }
+
     const login = (credentials) =>
         signInWithEmailAndPassword(auth, credentials.email, credentials.password);
 
-    const sendVerificationEmail = () => sendEmailVerification(user)
+
+    const googleLogin = () => {
+        const googleProvider = new GoogleAuthProvider();
+        signInWithPopup(auth, googleProvider);
+    }
 
     const logout = () => signOut(auth);
 
     return (
-        <AuthContext.Provider value={{ user, loading, signUp, sendVerificationEmail, login, logout }}>
+        <AuthContext.Provider value={{ user, loading, signUp, login, logout, googleLogin }}>
             {children}
         </AuthContext.Provider>
     );
